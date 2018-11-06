@@ -5,18 +5,18 @@ process.stdin.on('data', (data) => {
     const cmd = data.toString().trim();
     if (cmd === 'pwd') {
         const pwd = require('./pwd');
-        pwd();
+        pwd(done);
     } else if (cmd === 'ls') {
         const ls = require('./ls');
-        ls();
+        ls(done);
     } else if (cmd.startsWith('cat')) {
         let file = cmd.split(' ')[1];
         const cat = require('./cat');
-        cat(file);
+        cat(file, done);
     } else if (cmd.startsWith('curl')) {
         let url = cmd.split(' ')[1];
         const curl = require('./curl');
-        curl(url);
+        curl(url, done);
     }
     else {
         done('You typed: ' + cmd);
