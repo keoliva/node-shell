@@ -13,10 +13,18 @@ process.stdin.on('data', (data) => {
         let file = cmd.split(' ')[1];
         const cat = require('./cat');
         cat(file);
-    } else {
-        process.stdout.write('You typed: ' + cmd);
-        process.stdout.write('\nprompt>');
+    } else if (cmd.startsWith('curl')) {
+        let url = cmd.split(' ')[1];
+        const curl = require('./curl');
+        curl(url);
+    }
+    else {
+        done('You typed: ' + cmd);
     }
 });
 //when input === 'pwd, return full path to current working directory
 
+const done = (output) => {
+    process.stdout.write(output);
+    process.stdout.write('\nprompt>');
+}
