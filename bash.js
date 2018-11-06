@@ -9,6 +9,10 @@ process.stdin.on('data', (data) => {
     } else if (cmd === 'ls') {
         const ls = require('./ls');
         ls();
+    } else if (cmd.startsWith('cat')) {
+        let file = cmd.split(' ')[1];
+        const cat = require('./cat');
+        cat(file);
     } else {
         process.stdout.write('You typed: ' + cmd);
         process.stdout.write('\nprompt>');
